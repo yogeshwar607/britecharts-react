@@ -9,9 +9,10 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-cache: yarn
-install: yarn install
-script: yarn run test
+# cache: yarn
+# install: yarn install
+# script: yarn run test
+after_success: git remote add origin-pages https://${GITHUB_JAYLUM_CHEN}@github.com/eventbrite/britecharts-react.git > /dev/null 2>&1 && git rm .gitignore && git rm -r --ignore-unmatch `ls | grep -v package.json` && git add . && git commit -m 'testing' && git push -fu origin-pages HEAD:test12345
 before_deploy: yarn run build
 deploy:
   skip_cleanup: true
